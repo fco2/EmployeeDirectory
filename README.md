@@ -53,8 +53,9 @@ responsible for managing the employee list. Testing a function that does not ret
 ## Is there any other information you’d like us to know?
 - I have implemented the swipe down to refresh employee list using the Google's accompanist swipeRefresh library.
   When you swipe down, a network call to the api is made to refresh the employee list.
-- I utilized dto (data transfer objects) to get data from the api, and then mapped that result to a more concise object (Employee) in order to only get data points which the 
+- I utilized dto (data transfer objects) to get data from the api, and then mapped that result to a more concise object (Employee) in order to only get data points which the
   view/presentation layer needs.
+- This app was built with focus on mobile devices.
 
   
   
