@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">EmployeeDirectory</string>
+    <string name="employee_image">An employee image</string>
+    <string name="all_employees_header_text">All Employees</string>
+    <string name="empty_list_message">No items to display.</string>
+</resources>
