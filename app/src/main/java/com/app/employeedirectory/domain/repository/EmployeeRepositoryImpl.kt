@@ -20,7 +20,7 @@ class EmployeeRepositoryImpl @Inject constructor(
             //first emit a loading state while data is being fetched from the api
             emit(Resource.Loading())
             //fetch data from api
-            val employees = api.getAllEmployees().employees.map { it.toEmployee() }
+            val employees = api.getAllEmployees().employees.map { it.toEmployee() }.sortedBy { it.fullName }
             //run validation for all employees in list for non-null fields
             employees.forEach { employee ->
                 val validationMessage = requiredFieldsValidatedMessage(employee)
