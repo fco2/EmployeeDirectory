@@ -1,5 +1,8 @@
 package com.app.di
 
+import android.app.Application
+import androidx.room.Room
+import com.app.employeedirectory.data.local.EmployeeDatabase
 import com.app.employeedirectory.data.remote.api.EmployeeDirectoryApi
 import com.app.employeedirectory.domain.repository.EmployeeRepository
 import com.app.employeedirectory.domain.repository.EmployeeRepositoryImpl
@@ -28,7 +31,13 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideEmployeeRepository(api: EmployeeDirectoryApi): EmployeeRepository{
-        return EmployeeRepositoryImpl(api)
+    fun provideEmployeeDatabase(application: Application): EmployeeDatabase {
+        return Room.databaseBuilder(application, EmployeeDatabase::class.java, "employee_db").build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideEmployeeRepository(api: EmployeeDirectoryApi, database: EmployeeDatabase): EmployeeRepository{
+        return EmployeeRepositoryImpl(api, database)
     }
 }

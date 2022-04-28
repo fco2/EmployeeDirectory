@@ -6,19 +6,19 @@ import com.google.gson.annotations.SerializedName
 data class EmployeeDto(
     val biography: String,
     @SerializedName("email_address")
-    val emailAddress: String?,
+    val emailAddress: String,
     @SerializedName("employee_type")
-    val employeeType: String?,
+    val employeeType: String,
     @SerializedName("full_name")
-    val fullName: String?,
+    val fullName: String,
     @SerializedName("phone_number")
     val phoneNumber: String,
     @SerializedName("photo_url_large")
     val photoUrlLarge: String,
     @SerializedName("photo_url_small")
     val photoUrlSmall: String,
-    val team: String?,
-    val uuid: String?
+    val team: String,
+    val uuid: String
 ){
     fun toEmployee(): Employee{
         return Employee(
@@ -28,7 +28,9 @@ data class EmployeeDto(
             team = team,
             uuid = uuid,
             employeeType = employeeType,
-            emailAddress = emailAddress
+            emailAddress = emailAddress,
+            biography = biography,
+            photoUrlLarge = photoUrlLarge
         )
     }
 }
