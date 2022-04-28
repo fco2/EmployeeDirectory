@@ -16,7 +16,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.app.employeedirectory.presentation.all_employees.components.EmployeeInfo
+import com.app.employeedirectory.presentation.util.Screen
 import com.app.employeedirectory.ui.theme.LightGreenBackground
 import com.app.employeedirectory.ui.theme.SoftGreenBackground
 import com.google.accompanist.swiperefresh.SwipeRefresh
@@ -29,7 +31,8 @@ fun AllEmployeesScreen(
     contentDescriptionText: String,
     allEmployeesHeaderText: String,
     emptyListMessage: String,
-    viewModel: AllEmployeesViewModel = hiltViewModel()
+    viewModel: AllEmployeesViewModel = hiltViewModel(),
+    navController: NavController
 ){
     val allEmployeeState = viewModel.allEmployeesState
 
@@ -82,7 +85,9 @@ fun AllEmployeesScreen(
                                     employee = employee,
                                     placeHolderImgId = placeHolderImgId,
                                     contentDescriptionText = contentDescriptionText
-                                )
+                                ){  uuid ->
+                                    navController.navigate(Screen.EMPLOYEE_DETAIL + "?uuid=${uuid}")
+                                }
                                 if(index == allEmployeeState.employees.lastIndex)
                                     Spacer(modifier = Modifier.padding(6.dp))
                             }

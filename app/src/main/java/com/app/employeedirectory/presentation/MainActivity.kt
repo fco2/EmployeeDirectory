@@ -5,11 +5,14 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.app.employeedirectory.R
 import com.app.employeedirectory.presentation.all_employees.AllEmployeesScreen
+import com.app.employeedirectory.presentation.employee_details.EmployeeDetailScreen
 import com.app.employeedirectory.presentation.util.Screen
 import com.app.employeedirectory.ui.theme.EmployeeDirectoryTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,8 +37,20 @@ class MainActivity : ComponentActivity() {
                                 placeHolderImgId = placeHolderImageId,
                                 contentDescriptionText = contentDescriptionText,
                                 allEmployeesHeaderText = allEmployeesHeaderText,
-                                emptyListMessage = emptyListMessage
+                                emptyListMessage = emptyListMessage,
+                                navController = navController
                             )
+                        }
+
+                        composable(route = Screen.EMPLOYEE_DETAIL + "?uuid={uuid}",
+                            arguments = listOf(
+                                navArgument(name = "uuid"){
+                                      type = NavType.StringType
+                                      defaultValue = ""
+                            }
+                            )
+                        ){
+                            EmployeeDetailScreen(placeHolderImgId = placeHolderImageId, contentDescriptionText = contentDescriptionText)
                         }
                     }
                 }

@@ -1,6 +1,7 @@
 package com.app.employeedirectory.presentation.all_employees.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,6 +30,7 @@ fun EmployeeInfo(
     modifier: Modifier = Modifier,
     placeHolderImgId: Int,
     contentDescriptionText: String,
+    onClick: (String) -> Unit
 ){
     val context = LocalContext.current
 
@@ -37,7 +39,10 @@ fun EmployeeInfo(
         .padding(vertical = 4.dp)
         .clip(RoundedCornerShape(8.dp))
         .background(Color.White)
-        .padding(4.dp),
+        .padding(4.dp)
+        .clickable {
+                   onClick(employee.uuid)
+        },
         verticalAlignment = Alignment.CenterVertically
     ) {
         AsyncImage(

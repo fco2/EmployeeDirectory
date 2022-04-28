@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import okio.IOException
 import java.io.InvalidObjectException
+import java.lang.NullPointerException
 import javax.inject.Inject
 
 class EmployeeRepositoryImpl @Inject constructor(
@@ -26,7 +27,12 @@ class EmployeeRepositoryImpl @Inject constructor(
         try {
             //first emit a loading state while data is being fetched from the api
             emit(Resource.Loading())
+
+            Log.d("Test2", "Test2 before query")
+
             val employeesFromDatabase = database.dao.getAllEmployees().map { it.toEmployee() }
+
+            Log.d("Test2", "Test2 after query")
 
             if (employeesFromDatabase.isEmpty()){
                 //fetch data from api
@@ -42,18 +48,18 @@ class EmployeeRepositoryImpl @Inject constructor(
                 database.dao.insertEmployees(employees.map { it.toEmployeeEntity() })
 
                 //log
-                Log.d("Test", "Test from api: $employees")
+                Log.d("Test2", "Test2 from api: $employees")
             }
             else{
                 employees = employeesFromDatabase
                 //log
-                Log.d("Test", "Test from database: $employees")
+                Log.d("Test2", "Test2 from database: $employees")
             }
-
             emit(Resource.Success(employees))
         }catch (e: InvalidObjectException){
             emit(Resource.Error(e.message ?: "Json response data has null values!"))
-        }catch(e: IOException){
+        }
+        catch(e: IOException){
             emit(Resource.Error("A network error occurred. Please check internet connection"))
         } catch(e: Exception){
             emit(Resource.Error("An unexpected error occurred."))
